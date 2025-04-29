@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import Image from "next/image";
+import Head from 'next/head';
 
 // 使用 Google Fonts 的 Nunito 字体
 import { Nunito } from "next/font/google";
@@ -95,11 +96,15 @@ export default function Home() {
   }
 
   return (
-    <div
-      className={
-        `${nunito.className} min-h-screen flex flex-col items-center justify-center relative overflow-hidden` +
-        " bg-gradient-to-b from-pink-100 via-blue-100 to-purple-100"
-      }
+    <>
+      <Head>
+        <title>A cute website - okie.live</title>
+      </Head>
+      <div
+        className={
+          `${nunito.className} min-h-screen flex flex-col items-center justify-center relative overflow-hidden` +
+          " bg-gradient-to-b from-pink-100 via-blue-100 to-purple-100"
+        }
       style={{ fontFamily: "Nunito, sans-serif", cursor: "pointer" }}
       onClick={handleClick}
     >
@@ -142,5 +147,6 @@ export default function Home() {
         }
       `}</style>
     </div>
+    </>
   );
 }
