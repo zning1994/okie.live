@@ -1,115 +1,126 @@
+import { useEffect, useRef } from "react";
 import Image from "next/image";
-import { Geist, Geist_Mono } from "next/font/google";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+// 使用 Google Fonts 的 Nunito 字体
+import { Nunito } from "next/font/google";
+const nunito = Nunito({ subsets: ["latin"], weight: ["400", "700"] });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+// 樱花花瓣图片（可替换为本地 SVG 或 PNG）
+const SAKURA_IMG = "https://pngimg.com/d/sakura_PNG37.png"; // 公开CDN占位图
+
 
 export default function Home() {
+  // 用于管理页面上弹出的 okie 字样
+  const okieContainerRef = useRef<HTMLDivElement>(null);
+
+  // 樱花花瓣动效
+  useEffect(() => {
+    const sakuraContainer = document.createElement("div");
+    sakuraContainer.style.position = "fixed";
+    sakuraContainer.style.top = "0";
+    sakuraContainer.style.left = "0";
+    sakuraContainer.style.width = "100vw";
+    sakuraContainer.style.height = "100vh";
+    sakuraContainer.style.pointerEvents = "none";
+    sakuraContainer.style.zIndex = "0";
+    document.body.appendChild(sakuraContainer);
+
+    function createSakuraPetal() {
+      const petal = document.createElement("img");
+      petal.src = SAKURA_IMG;
+      petal.style.position = "absolute";
+      petal.style.left = Math.random() * window.innerWidth + "px";
+      petal.style.top = "-40px";
+      petal.style.width = 24 + Math.random() * 16 + "px";
+      petal.style.opacity = String(0.7 + Math.random() * 0.3);
+      petal.style.transform = `rotate(${Math.random() * 360}deg)`;
+      petal.style.pointerEvents = "none";
+      sakuraContainer.appendChild(petal);
+
+      const duration = 6 + Math.random() * 4;
+      const translateX = (Math.random() - 0.5) * 100;
+      petal.animate([
+        { transform: petal.style.transform, top: petal.style.top, left: petal.style.left },
+        { transform: `rotate(${Math.random() * 360}deg)`, top: window.innerHeight + 40 + "px", left: `calc(${petal.style.left} + ${translateX}px)` }
+      ], {
+        duration: duration * 1000,
+        easing: "linear"
+      });
+      setTimeout(() => {
+        sakuraContainer.removeChild(petal);
+      }, duration * 1000);
+    }
+    const sakuraInterval = setInterval(createSakuraPetal, 500);
+    return () => {
+      clearInterval(sakuraInterval);
+      document.body.removeChild(sakuraContainer);
+    };
+  }, []);
+
+  // 点击页面时弹出 okie 动效
+  function handleClick(e: React.MouseEvent) {
+    const container = okieContainerRef.current;
+    if (!container) return;
+    const okie = document.createElement("div");
+    okie.innerText = "okie";
+    okie.className = "okie-bounce";
+    okie.style.position = "absolute";
+    okie.style.left = e.clientX - 20 + "px";
+    okie.style.top = e.clientY - 30 + "px";
+    okie.style.fontSize = "2rem";
+    okie.style.fontWeight = "bold";
+    okie.style.color = "#ff7eb9";
+    okie.style.textShadow = "0 2px 8px #fff5, 0 1px 0 #fff";
+    okie.style.pointerEvents = "none";
+    okie.style.userSelect = "none";
+    okie.style.zIndex = "10";
+    container.appendChild(okie);
+    setTimeout(() => {
+      okie.style.opacity = "0";
+      okie.style.transform = "translateY(-40px) scale(1.3)";
+    }, 100);
+    setTimeout(() => {
+      container.removeChild(okie);
+    }, 1000);
+  }
+
   return (
     <div
-      className={`${geistSans.className} ${geistMono.className} grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]`}
+      className={
+        `${nunito.className} min-h-screen flex flex-col items-center justify-center relative overflow-hidden` +
+        " bg-gradient-to-b from-pink-100 via-blue-100 to-purple-100"
+      }
+      style={{ fontFamily: "Nunito, sans-serif", cursor: "pointer" }}
+      onClick={handleClick}
     >
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
+      {/* okie 弹出字样容器 */}
+      <div ref={okieContainerRef} className="fixed inset-0 pointer-events-none z-20" />
+      {/* JK 少女插画（可替换为本地图片或 SVG） */}
+      <div className="z-10 flex flex-col items-center">
         <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
+          src="https://png.pngtree.com/png-clipart/20221222/ourmid/pngtree-manga-two-dimensional-character-uniform-girl-cartoon-element-png-image_6503957.png"
+          alt="JK少女"
+          width={260}
+          height={340}
+          style={{ borderRadius: "1.5rem", boxShadow: "0 4px 32px #ffb5e5aa" }}
           priority
         />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/pages/index.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        <h1 className="mt-6 text-3xl sm:text-4xl font-bold text-pink-500 drop-shadow-lg tracking-wide">
+          欢迎来到 okie.live！
+        </h1>
+        <p className="mt-2 text-lg sm:text-xl text-purple-500 font-semibold">
+          在这里发现可爱的世界~
+        </p>
+      </div>
+      <style jsx global>{`
+        body {
+          background: linear-gradient(135deg, #ffe3f3 0%, #cce7ff 100%);
+        }
+        .okie-bounce {
+          transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+          will-change: transform, opacity;
+        }
+      `}</style>
     </div>
   );
 }
