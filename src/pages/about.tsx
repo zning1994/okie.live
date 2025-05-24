@@ -3,13 +3,15 @@ import { useI18n } from '@/lib/i18n'
 import Layout from '@/components/layout/Layout'
 
 export default function About() {
+  // 始终调用 useI18n，确保 hooks 顺序一致
+  const { t } = useI18n()
+  
+  // 使用客户端检测来处理 SSR
   const [isClient, setIsClient] = useState(false)
   
   useEffect(() => {
     setIsClient(true)
   }, [])
-
-  const { t } = isClient ? useI18n() : { t: (key: string) => key }
 
   return (
     <Layout title={t('footer.about_us')}>

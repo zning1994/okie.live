@@ -4,14 +4,15 @@ import type { TranslationKey } from '@/lib/i18n';
 import Layout from '@/components/layout/Layout'
 
 export default function Privacy() {
+  // 始终调用 useI18n，确保 hooks 顺序一致
+  const { t } = useI18n()
+  
+  // 使用客户端检测来处理 SSR
   const [isClient, setIsClient] = useState(false)
   
   useEffect(() => {
     setIsClient(true)
   }, [])
-
-  // 使用i18n国际化系统
-  const { t } = isClient ? useI18n() : { t: (key: string) => key }
 
   return (
     <Layout title={t('footer.privacy_policy')}>
