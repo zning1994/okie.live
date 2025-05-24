@@ -105,9 +105,9 @@ export default function Home() {
 
   return (
     <Layout>
-      <div
+      {/* <div
         className={`${montserrat.className} min-h-screen flex flex-col items-center relative overflow-hidden bg-primary-bg-light`}
-      >
+      > */}
 
         {/* 主内容区 */}
         <main className="flex-1 w-full max-w-6xl mx-auto px-8 py-10 sm:py-16 flex flex-col items-center z-10">
@@ -212,7 +212,7 @@ export default function Home() {
 
           {/* CTA 按钮 */}
           <motion.div
-            className="flex flex-col sm:flex-row gap-5 justify-center animate-on-scroll"
+            className="flex flex-col sm:flex-row gap-5 justify-center animate-on-scroll mb-8"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
@@ -225,7 +225,7 @@ export default function Home() {
             </button>
           </motion.div>
         </main>
-      </div>
+      {/* </div> */}
     </Layout>
   );
 }

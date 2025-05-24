@@ -15,7 +15,7 @@ export default function About() {
 
   return (
     <Layout title={t('footer.about_us')}>
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-56 py-8">
         <h1 className="text-4xl font-bold mb-8">{t('footer.about_us')}</h1>
         <div className="prose max-w-none">
         <section className="mb-8">

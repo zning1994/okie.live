@@ -15,7 +15,7 @@ export default function Header() {
   const { language, setLanguage, t } = useI18n();
 
   return (
-    <nav className="w-full py-3 sm:py-5 px-4 sm:px-8 flex justify-between items-center z-10 bg-white/90 backdrop-blur-sm border-b border-primary/10">
+    <nav className={`w-full py-3 sm:py-5 px-4 sm:px-8 flex justify-between items-center z-10 bg-white/90 backdrop-blur-sm border-b border-primary/10 ${playfair.className} ${montserrat.className}`}>
       <div className="flex items-center">
         <Link href="/" className="hover:opacity-80 transition-opacity">
           <Image
@@ -49,7 +49,7 @@ export default function Header() {
         </div>
         <button 
           className="px-2 sm:px-3 py-1.5 sm:py-2 text-sm rounded-md bg-primary text-white hover:bg-primary/90 transition-colors whitespace-nowrap">
-          {t('cta.getStarted')}
+          <b>{t('cta.getStarted')}</b>
         </button>
       </div>
     </nav>

@@ -89,7 +89,7 @@ const translations: Translations = {
     'site.title': 'OkieLive - Orchestrating the World of Performance',
     'site.description': 'A Unified Platform for Artists, Venues, and Organizers',
     'site.slogan': 'OkieLive – Orchestrating the World of Performance.',
-    'site.copyright': ' 2025 OkieLive. All rights reserved.',
+    'site.copyright': ' 2025 Okie.live. All rights reserved.',
     'site.name': 'OkieLive',
     
     // 导航
@@ -151,7 +151,7 @@ const translations: Translations = {
     'site.title': '欧奇演界 - 一站式演出生态平台',
     'site.description': '艺人、场地、主办方，一站式演出生态平台',
     'site.slogan': '欧奇演界 · 一站式演出生态平台',
-    'site.copyright': ' 2025 欧奇演界. ',
+    'site.copyright': '  2025 Okie.live. All rights reserved.',
     'site.name': '欧奇演界',
     
     // 导航
@@ -231,7 +231,7 @@ const translations: Translations = {
     'privacy.contact.title': 'お問い合わせ',
     'privacy.contact.description': 'このプライバシーポリシーについてご質問がある場合は、お問い合わせください。',
     'site.slogan': 'OkieLive – パフォーマンスの世界を調和させる',
-    'site.copyright': ' 2025 OkieLive. ',
+    'site.copyright': ' 2025 Okie.live. All rights reserved.',
     'site.name': 'OkieLive',
     
     // 导航
