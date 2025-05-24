@@ -1,152 +1,279 @@
-import { useEffect, useRef } from "react";
-import Image from "next/image";
+import '../styles/globals.css'
+import { useEffect, useRef, useState } from "react";
 import Head from 'next/head';
+import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
+import { FaCalendarAlt, FaUserAlt, FaBuilding, FaTicketAlt, FaChartLine } from "react-icons/fa";
 
-// 使用 Google Fonts 的 Nunito 字体
-import { Nunito } from "next/font/google";
-const nunito = Nunito({ subsets: ["latin"], weight: ["400", "700"] });
-
-// 樱花花瓣图片（请将图片复制到 public/assets/sakura.png）
-const SAKURA_IMG = "/assets/sakura.png";
-
+// 使用 Google Fonts 的 Playfair Display 和 Montserrat 字体
+import { Playfair_Display, Montserrat } from "next/font/google";
+const playfair = Playfair_Display({ subsets: ["latin"], weight: ["400", "700"] });
+const montserrat = Montserrat({ subsets: ["latin"], weight: ["400", "500", "600", "700"] });
 
 export default function Home() {
-  // 用于管理页面上弹出的 okie 字样
-  const okieContainerRef = useRef<HTMLDivElement>(null);
-
-  // 樱花花瓣动效
+  const [language, setLanguage] = useState<"zh" | "en">("zh");
+  const [currentFeatureIndex, setCurrentFeatureIndex] = useState(0);
+  
+  // 鼠标悬停效果状态
+  const [hoveredFeature, setHoveredFeature] = useState<number | null>(null);
+  
+  // 页面滚动动画效果
   useEffect(() => {
-    const sakuraContainer = document.createElement("div");
-    sakuraContainer.style.position = "fixed";
-    sakuraContainer.style.top = "0";
-    sakuraContainer.style.left = "0";
-    sakuraContainer.style.width = "100vw";
-    sakuraContainer.style.height = "100vh";
-    sakuraContainer.style.pointerEvents = "none";
-    sakuraContainer.style.zIndex = "0";
-    document.body.appendChild(sakuraContainer);
-
-    function createSakuraPetal() {
-      // 每次生成2~3个花瓣
-      const count = 2 + Math.floor(Math.random() * 2);
-      for (let i = 0; i < count; i++) {
-        const petal = document.createElement("img");
-        petal.src = SAKURA_IMG;
-        petal.style.position = "absolute";
-        petal.style.left = Math.random() * window.innerWidth + "px";
-        petal.style.top = "-40px";
-        petal.style.width = 24 + Math.random() * 16 + "px";
-        petal.style.opacity = String(0.7 + Math.random() * 0.3);
-        petal.style.transform = `rotate(${Math.random() * 360}deg)`;
-        petal.style.pointerEvents = "none";
-        sakuraContainer.appendChild(petal);
-
-        const duration = 6 + Math.random() * 4;
-        const translateX = (Math.random() - 0.5) * 100;
-        petal.animate([
-          { transform: petal.style.transform, top: petal.style.top, left: petal.style.left },
-          { transform: `rotate(${Math.random() * 360}deg)`, top: window.innerHeight + 40 + "px", left: `calc(${petal.style.left} + ${translateX}px)` }
-        ], {
-          duration: duration * 1000,
-          easing: "linear"
-        });
-        setTimeout(() => {
-          sakuraContainer.removeChild(petal);
-        }, duration * 1000);
-      }
-    }
-    const sakuraInterval = setInterval(createSakuraPetal, 120);
-    return () => {
-      clearInterval(sakuraInterval);
-      document.body.removeChild(sakuraContainer);
+    const handleScroll = () => {
+      const elements = document.querySelectorAll('.animate-on-scroll');
+      elements.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        const isVisible = rect.top < window.innerHeight - 100;
+        if (isVisible) {
+          el.classList.add('animate-visible');
+        }
+      });
     };
+    
+    window.addEventListener('scroll', handleScroll);
+    // 初始触发一次
+    handleScroll();
+    
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+  
+  // 语言切换动画效果
+  const textVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+  };
+  
+  // 特性卡片悬停效果
+  const featureCardVariants = {
+    hover: { 
+      y: -10, 
+      boxShadow: '0 15px 30px rgba(224, 106, 75, 0.15)',
+      transition: { duration: 0.3 }
+    }
+  };
 
-  // 多语言点击词
-  const okieWords = [
-    "okie", // 英文
-    "おきー", // 日语
-    "欧气" // 中文
+  // 特性列表
+  const features = [
+    {
+      icon: <FaCalendarAlt className="text-3xl text-[#e06a4b]" />,
+      titleZh: "排期管理",
+      titleEn: "Smart Scheduling",
+      descZh: "高效管理演出档期，避免冲突",
+      descEn: "Efficiently manage performance schedules and avoid conflicts"
+    },
+    {
+      icon: <FaUserAlt className="text-3xl text-[#e06a4b]" />,
+      titleZh: "艺人档案",
+      titleEn: "Talent Profiles",
+      descZh: "完整记录艺人信息与演出历史",
+      descEn: "Complete artist information and performance history"
+    },
+    {
+      icon: <FaBuilding className="text-3xl text-[#e06a4b]" />,
+      titleZh: "场地对接",
+      titleEn: "Venue Integration",
+      descZh: "便捷查询和预订演出场地",
+      descEn: "Easily search and book performance venues"
+    },
+    {
+      icon: <FaTicketAlt className="text-3xl text-[#e06a4b]" />,
+      titleZh: "票务系统",
+      titleEn: "Ticketing System",
+      descZh: "无缝对接各大票务平台",
+      descEn: "Seamless integration with major ticketing platforms"
+    },
+    {
+      icon: <FaChartLine className="text-3xl text-[#e06a4b]" />,
+      titleZh: "数据分析",
+      titleEn: "Data Insights",
+      descZh: "全面的演出数据统计与分析",
+      descEn: "Comprehensive performance data statistics and analysis"
+    }
   ];
-  // 点击页面时弹出 okie 动效
-  function handleClick(e: React.MouseEvent) {
-    const container = okieContainerRef.current;
-    if (!container) return;
-    const okie = document.createElement("div");
-    okie.innerText = okieWords[Math.floor(Math.random() * okieWords.length)];
-    okie.className = "okie-bounce";
-    okie.style.position = "absolute";
-    okie.style.left = e.clientX - 20 + "px";
-    okie.style.top = e.clientY - 30 + "px";
-    okie.style.fontSize = "2rem";
-    okie.style.fontWeight = "bold";
-    okie.style.color = "#ff7eb9";
-    okie.style.textShadow = "0 2px 8px #fff5, 0 1px 0 #fff";
-    okie.style.pointerEvents = "none";
-    okie.style.userSelect = "none";
-    okie.style.zIndex = "10";
-    container.appendChild(okie);
-    setTimeout(() => {
-      okie.style.opacity = "0";
-      okie.style.transform = "translateY(-40px) scale(1.3)";
-    }, 100);
-    setTimeout(() => {
-      container.removeChild(okie);
-    }, 1000);
-  }
+
+  // 自动轮播特性
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentFeatureIndex((prev) => (prev + 1) % features.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [features.length]);
 
   return (
     <>
       <Head>
-        <title>A cute website - okie.live</title>
+        <title>{language === "zh" ? "欧奇演界 - 一站式演出生态平台" : "OkieLive - Orchestrating the World of Performance"}</title>
+        <meta 
+          name="description" 
+          content={language === "zh" 
+            ? "欧奇演界是一款面向全球演出行业的一站式演出管理与协作平台，支持多角色协同管理。" 
+            : "OkieLive is an all-in-one performance management and collaboration platform for the global live entertainment industry."
+          } 
+        />
       </Head>
       <div
-        className={
-          `${nunito.className} min-h-screen flex flex-col items-center justify-center relative overflow-hidden` +
-          " bg-gradient-to-b from-pink-100 via-blue-100 to-purple-100"
-        }
-      style={{ fontFamily: "Nunito, sans-serif", cursor: "pointer" }}
-      onClick={handleClick}
-    >
-      {/* okie 弹出字样容器 */}
-      <div ref={okieContainerRef} className="fixed inset-0 pointer-events-none z-20" />
-      {/* JK 少女插画（可替换为本地图片或 SVG） */}
-      <div className="z-10 flex flex-col items-center">
-        <Image
-          src="https://png.pngtree.com/png-clipart/20221222/ourmid/pngtree-manga-two-dimensional-character-uniform-girl-cartoon-element-png-image_6503957.png"
-          alt="JK少女"
-          width={260}
-          height={340}
-          style={{ borderRadius: "1.5rem", boxShadow: "0 4px 32px #ffb5e5aa" }}
-          priority
-        />
-        <h1 className="mt-6 text-3xl sm:text-4xl font-bold text-pink-500 drop-shadow-lg tracking-wide flex flex-col items-center">
-          <span>欢迎来到 okie.live！</span>
-          <span className="text-lg text-blue-500 mt-1">Welcome to okie.live!</span>
-          <span className="text-lg text-purple-500 mt-1">おきーへようこそ！</span>
-        </h1>
-        <p className="mt-2 text-lg sm:text-xl text-purple-500 font-semibold flex flex-col items-center">
-          <span>在这里发现可爱的世界~</span>
-          <span className="text-base text-blue-500 mt-1">Discover a cute world here~</span>
-          <span className="text-base text-purple-500 mt-1">ここで可愛い世界を見つけよう〜</span>
-        </p>
-        {/* 三语点击提示 */}
-        <div className="mt-8 text-sm text-gray-500 animate-pulse select-none">
-          <div>点击屏幕有惊喜！</div>
-          <div>Click the screen for a surprise!</div>
-          <div>画面をクリックしてサプライズ！</div>
-        </div>
+        className={`${montserrat.className} min-h-screen flex flex-col items-center relative overflow-hidden bg-okie-bg-light`}
+      >
+        {/* 导航栏 */}
+        <nav className="w-full py-5 px-8 flex justify-between items-center z-10 bg-white/90 backdrop-blur-sm border-b border-okie-primary/10">
+          <div className="flex items-center">
+            <h1 className={`${playfair.className} text-2xl font-bold text-okie-primary`}>
+              {language === "zh" ? "欧奇演界" : "OkieLive"}
+            </h1>
+          </div>
+          <div className="flex items-center gap-4">
+            <button 
+              onClick={(e) => {
+                setLanguage("zh");
+              }}
+              className={`px-4 py-2 rounded-md text-sm transition-colors ${language === "zh" ? "bg-okie-primary text-white" : "bg-okie-bg-medium text-okie-primary"}`}
+            >
+              中文
+            </button>
+            <button 
+              onClick={(e) => {
+                setLanguage("en");
+              }}
+              className={`px-4 py-2 rounded-md text-sm transition-colors ${language === "en" ? "bg-okie-primary text-white" : "bg-okie-bg-medium text-okie-primary"}`}
+            >
+              English
+            </button>
+          </div>
+        </nav>
+
+        {/* 主内容区 */}
+        <main className="flex-1 w-full max-w-6xl mx-auto px-8 py-16 flex flex-col items-center z-10">
+          {/* 标题和介绍 */}
+          <motion.div 
+            className="text-center mb-16 animate-on-scroll"
+            initial="hidden"
+            animate="visible"
+            variants={textVariants}
+          >
+            <h1 className={`${playfair.className} text-5xl md:text-6xl font-bold mb-6 text-okie-primary`}>
+              {language === "zh" ? "欧奇演界" : "OkieLive"}
+            </h1>
+            <p className="text-xl md:text-2xl text-[#333] mb-8 font-medium">
+              {language === "zh" ? "艺人、场地、主办方，一站式演出生态平台" : "A Unified Platform for Artists, Venues, and Organizers"}
+            </p>
+            <p className="text-lg max-w-3xl mx-auto text-[#555] leading-relaxed">
+              {language === "zh" 
+                ? "欧奇演界是一款面向全球演出行业的一站式演出管理与协作平台，支持多角色协同管理，包括艺人、经纪人、场地方、主办方及票务方等。平台提供排期管理、艺人档案、合同流转、票务对接、数据统计等全流程数字化工具，助力演出活动高效落地与专业运营。" 
+                : "OkieLive is an all-in-one performance management and collaboration platform designed for the global live entertainment industry. It empowers artists, agents, venues, organizers, and ticketing partners to work seamlessly through smart scheduling, talent profiles, contract workflows, ticketing integration, and data insights — enabling efficient execution and professional operations for every event."}
+            </p>
+          </motion.div>
+
+          {/* 特性展示 */}
+          <div className="w-full mb-20 animate-on-scroll">
+            <h2 className={`${playfair.className} text-3xl font-bold text-center mb-12 text-gray-800`}>
+              {language === "zh" ? "核心功能" : "Core Features"}
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {features.map((feature, index) => (
+                <motion.div
+                  key={index}
+                  className="bg-white p-8 rounded-lg border border-okie-primary/10 shadow-sm"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  whileHover="hover"
+                  variants={featureCardVariants}
+                >
+                  <div className="flex flex-col items-center text-center">
+                    <div className="mb-6 p-4 bg-okie-primary/10 rounded-full">
+                      {feature.icon}
+                    </div>
+                    <h3 className={`${playfair.className} text-xl font-bold mb-3 text-gray-800`}>
+                      {language === "zh" ? feature.titleZh : feature.titleEn}
+                    </h3>
+                    <p className="text-gray-600">
+                      {language === "zh" ? feature.descZh : feature.descEn}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* 轮播特性（移动端） */}
+          <div className="md:hidden w-full mb-16 animate-on-scroll">
+            <div className="bg-white p-8 rounded-lg border border-okie-primary/10 shadow-sm">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentFeatureIndex}
+                  className="flex flex-col items-center text-center"
+                  initial={{ opacity: 0, x: 50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -50 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className="mb-6 p-4 bg-okie-primary/10 rounded-full">
+                    {features[currentFeatureIndex].icon}
+                  </div>
+                  <h3 className={`${playfair.className} text-xl font-bold mb-3 text-gray-800`}>
+                    {language === "zh" 
+                      ? features[currentFeatureIndex].titleZh 
+                      : features[currentFeatureIndex].titleEn}
+                  </h3>
+                  <p className="text-gray-600">
+                    {language === "zh" 
+                      ? features[currentFeatureIndex].descZh 
+                      : features[currentFeatureIndex].descEn}
+                  </p>
+                </motion.div>
+              </AnimatePresence>
+              <div className="flex justify-center mt-6 gap-2">
+                {features.map((_, index) => (
+                  <button
+                    key={index}
+                    className={`w-2 h-2 rounded-full ${
+                      index === currentFeatureIndex ? "bg-okie-primary" : "bg-gray-300"
+                    }`}
+                    onClick={() => setCurrentFeatureIndex(index)}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* CTA 按钮 */}
+          <motion.div
+            className="flex flex-col sm:flex-row gap-5 justify-center animate-on-scroll"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
+            <button className="btn-primary">
+              {language === "zh" ? "立即体验" : "Get Started"}
+            </button>
+            <button className="btn-secondary">
+              {language === "zh" ? "了解更多" : "Learn More"}
+            </button>
+          </motion.div>
+        </main>
+
+        {/* 页脚 */}
+        <footer className="w-full py-8 bg-white border-t border-okie-primary/10 z-10">
+          <div className="max-w-6xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center">
+            <p className="text-gray-600 mb-6 md:mb-0">
+              © 2025 OkieLive. All rights reserved.
+            </p>
+            <div className="flex gap-8">
+              <a href="#" className="text-gray-600 hover:text-okie-primary transition-colors">
+                {language === "zh" ? "关于我们" : "About Us"}
+              </a>
+              <a href="#" className="text-gray-600 hover:text-okie-primary transition-colors">
+                {language === "zh" ? "联系我们" : "Contact Us"}
+              </a>
+              <a href="#" className="text-gray-600 hover:text-okie-primary transition-colors">
+                {language === "zh" ? "隐私政策" : "Privacy Policy"}
+              </a>
+            </div>
+          </div>
+        </footer>
       </div>
-      <style jsx global>{`
-        body {
-          background: linear-gradient(135deg, #ffe3f3 0%, #cce7ff 100%);
-        }
-        .okie-bounce {
-          transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
-          will-change: transform, opacity;
-        }
-      `}</style>
-    </div>
+
+      {/* 全局样式已移至 globals.css */}
     </>
   );
 }
