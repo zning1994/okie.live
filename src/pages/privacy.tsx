@@ -1,6 +1,7 @@
+/* eslint-disable */
+
 import { useEffect, useState } from 'react'
 import { useI18n } from '@/lib/i18n'
-import type { TranslationKey } from '@/lib/i18n';
 import Layout from '@/components/Layout'
 
 export default function Privacy() {

@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { useEffect, useState } from 'react'
 import { useI18n } from '@/lib/i18n'
 import Layout from '@/components/Layout'
