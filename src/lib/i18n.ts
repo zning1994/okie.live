@@ -48,6 +48,24 @@ export type TranslationKey =
   | 'features.analytics.title'
   | 'features.analytics.description'
 
+  // 联系表单
+  | 'contact.name'
+  | 'contact.email'
+  | 'contact.message'
+  | 'contact.submit'
+
+  // 隐私政策
+  | 'privacy.collection.title'
+  | 'privacy.collection.description'
+  | 'privacy.usage.title'
+  | 'privacy.usage.description'
+  | 'privacy.sharing.title'
+  | 'privacy.sharing.description'
+  | 'privacy.security.title'
+  | 'privacy.security.description'
+  | 'privacy.contact.title'
+  | 'privacy.contact.description'
+
 // 翻译内容类型
 type Translations = {
   [K in Language]: {
@@ -106,7 +124,25 @@ const translations: Translations = {
     'features.ticketing.title': 'Ticketing System',
     'features.ticketing.description': 'Seamless integration with major ticketing platforms',
     'features.analytics.title': 'Data Insights',
-    'features.analytics.description': 'Comprehensive performance data statistics and analysis'
+    'features.analytics.description': 'Comprehensive performance data statistics and analysis',
+
+    // 联系表单
+    'contact.name': 'Name',
+    'contact.email': 'Email',
+    'contact.message': 'Message',
+    'contact.submit': 'Send Message',
+
+    // 隐私政策
+    'privacy.collection.title': 'Information Collection',
+    'privacy.collection.description': 'We collect information that you provide directly to us, including when you create an account, make a booking, or contact us for support.',
+    'privacy.usage.title': 'How We Use Your Information',
+    'privacy.usage.description': 'We use the information we collect to provide, maintain, and improve our services, and to communicate with you.',
+    'privacy.sharing.title': 'Information Sharing',
+    'privacy.sharing.description': 'We do not share your personal information with third parties except as described in this privacy policy.',
+    'privacy.security.title': 'Data Security',
+    'privacy.security.description': 'We take reasonable measures to help protect your personal information from loss, theft, misuse, and unauthorized access.',
+    'privacy.contact.title': 'Contact Us',
+    'privacy.contact.description': 'If you have any questions about this Privacy Policy, please contact us.'
   },
   
   // 中文
@@ -136,6 +172,24 @@ const translations: Translations = {
     'footer.about_us': '关于我们',
     'footer.contact_us': '联系我们',
     'footer.privacy_policy': '隐私政策',
+
+    // 联系表单
+    'contact.name': '姓名',
+    'contact.email': '邮箱',
+    'contact.message': '留言',
+    'contact.submit': '发送消息',
+
+    // 隐私政策
+    'privacy.collection.title': '信息收集',
+    'privacy.collection.description': '我们收集您直接提供给我们的信息，包括当您创建账户、进行预订或联系我们寻求支持时。',
+    'privacy.usage.title': '信息使用方式',
+    'privacy.usage.description': '我们使用收集的信息来提供、维护和改进我们的服务，并与您进行沟通。',
+    'privacy.sharing.title': '信息共享',
+    'privacy.sharing.description': '除本隐私政策所述情况外，我们不会与第三方共享您的个人信息。',
+    'privacy.security.title': '数据安全',
+    'privacy.security.description': '我们采取合理措施来帮助保护您的个人信息免遭丢失、盗窃、滥用和未经授权的访问。',
+    'privacy.contact.title': '联系我们',
+    'privacy.contact.description': '如果您对本隐私政策有任何疑问，请联系我们。',
     'footer.terms': '服务条款',
     'footer.copyright': ' 2025 欧奇演界. ',
     
@@ -158,6 +212,24 @@ const translations: Translations = {
     // 网站基本信息
     'site.title': 'OkieLive - パフォーマンスの世界を調和させる',
     'site.description': 'アーティスト、会場、主催者のための統合プラットフォーム',
+
+    // 联系表单
+    'contact.name': '名前',
+    'contact.email': 'メールアドレス',
+    'contact.message': 'メッセージ',
+    'contact.submit': 'メッセージを送信',
+
+    // 隐私政策
+    'privacy.collection.title': '情報収集',
+    'privacy.collection.description': 'アカウントの作成、予約、サポートのお問い合わせなど、お客様から直接提供される情報を収集します。',
+    'privacy.usage.title': '情報の使用方法',
+    'privacy.usage.description': '収集した情報は、サービスの提供、維持、改善、およびお客様とのコミュニケーションに使用します。',
+    'privacy.sharing.title': '情報の共有',
+    'privacy.sharing.description': 'このプライバシーポリシーに記載されている場合を除き、個人情報を第三者と共有することはありません。',
+    'privacy.security.title': 'データセキュリティ',
+    'privacy.security.description': '個人情報の紛失、盗難、不正使用、不正アクセスから保護するための適切な措置を講じています。',
+    'privacy.contact.title': 'お問い合わせ',
+    'privacy.contact.description': 'このプライバシーポリシーについてご質問がある場合は、お問い合わせください。',
     'site.slogan': 'OkieLive – パフォーマンスの世界を調和させる',
     'site.copyright': ' 2025 OkieLive. ',
     'site.name': 'OkieLive',

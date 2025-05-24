@@ -1,6 +1,5 @@
 /* eslint-disable */
-import { useEffect, useRef, useState } from "react";
-import Head from 'next/head';
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from 'next/link';
 import { motion, AnimatePresence } from "framer-motion";
@@ -15,31 +14,16 @@ const montserrat = Montserrat({ subsets: ["latin"], weight: ["400", "500", "600"
 import { useI18n } from '@/lib/i18n';
 import type { TranslationKey } from '@/lib/i18n';
 
+// 导入布局组件
+import Layout from '@/components/layout/Layout';
+
 export default function Home() {
   // 使用i18n国际化系统
-  const { language, setLanguage, t, initLanguage } = useI18n();
+  const { t, language, setLanguage } = useI18n();
   const [currentFeatureIndex, setCurrentFeatureIndex] = useState(0);
   
   // 鼠标悬停效果状态
   const [hoveredFeature, setHoveredFeature] = useState<number | null>(null);
-  
-  // 语言下拉菜单状态
-  const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
-  const langMenuRef = useRef<HTMLDivElement>(null);
-  
-  // 点击页面其他区域时关闭语言下拉菜单
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (langMenuRef.current && !langMenuRef.current.contains(event.target as Node)) {
-        setIsLangMenuOpen(false);
-      }
-    };
-    
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
   
   // 语言初始化由 LanguageDetector 组件处理
   
@@ -120,56 +104,10 @@ export default function Home() {
   }, [features.length]);
 
   return (
-    <>
-      <Head>
-        <title>{t('site.title')}</title>
-        <meta 
-          name="description" 
-          content={t('site.description')} 
-        />
-      </Head>
+    <Layout>
       <div
         className={`${montserrat.className} min-h-screen flex flex-col items-center relative overflow-hidden bg-primary-bg-light`}
       >
-        {/* 导航栏 */}
-        <nav className="w-full py-3 sm:py-5 px-4 sm:px-8 flex justify-between items-center z-10 bg-white/90 backdrop-blur-sm border-b border-primary/10">
-          <div className="flex items-center">
-            <Link href="/" className="hover:opacity-80 transition-opacity">
-              <Image
-                src="/okielivelogo.png"
-                alt="OkieLive Logo"
-                width={160}
-                height={40}
-                className="w-[140px] sm:w-[200px] h-auto object-contain"
-              />
-            </Link>
-          </div>
-          <div className="flex items-center gap-2 sm:gap-4">
-            <div className="relative group">
-              <select
-                value={language}
-                onChange={(e) => setLanguage(e.target.value as 'zh' | 'en' | 'ja')}
-                className="appearance-none px-2 sm:px-3 py-1.5 sm:py-2 text-sm sm:text-base rounded-md hover:bg-gray-100 flex items-center gap-2 pr-7 sm:pr-8 cursor-pointer"
-              >
-                <option value="zh">中文</option>
-                <option value="en">EN</option>
-                <option value="ja">日本語</option>
-              </select>
-              <svg 
-                className="w-3 h-3 sm:w-4 sm:h-4 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" 
-                fill="none" 
-                stroke="currentColor" 
-                viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            </div>
-            <button 
-              className="px-2 sm:px-3 py-1.5 sm:py-2 text-sm rounded-md bg-primary text-white hover:bg-primary/90 transition-colors whitespace-nowrap">
-              {t('cta.getStarted')}
-            </button>
-          </div>
-        </nav>
 
         {/* 主内容区 */}
         <main className="flex-1 w-full max-w-6xl mx-auto px-8 py-10 sm:py-16 flex flex-col items-center z-10">
@@ -287,29 +225,7 @@ export default function Home() {
             </button>
           </motion.div>
         </main>
-
-        {/* 页脚 */}
-        <footer className="w-full py-8 bg-white border-t border-primary/10 z-10">
-          <div className="max-w-6xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-600 mb-6 md:mb-0">
-              © {t('site.copyright')}
-            </p>
-            <div className="flex gap-8">
-              <a href="#" className="text-gray-600 hover:text-primary transition-colors">
-                {t('footer.about_us')}
-              </a>
-              <a href="#" className="text-gray-600 hover:text-primary transition-colors">
-                {t('footer.contact_us')}
-              </a>
-              <a href="#" className="text-gray-600 hover:text-primary transition-colors">
-                {t('footer.privacy_policy')}
-              </a>
-            </div>
-          </div>
-        </footer>
       </div>
-
-      {/* 全局样式已移至 globals.css */}
-    </>
+    </Layout>
   );
 }
