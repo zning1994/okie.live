@@ -24,7 +24,7 @@ export default function Header() {
             alt="OkieLive Logo"
             width={160}
             height={40}
-            className="w-[140px] sm:w-[200px] h-auto object-contain"
+            className="w-[120px] sm:w-[200px] h-auto object-contain"
           />
         </Link>
       </div>
@@ -48,8 +48,15 @@ export default function Header() {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
           </svg>
         </div>
-        <button 
-          className="px-2 sm:px-3 py-1.5 sm:py-2 text-sm rounded-md bg-primary text-white hover:bg-primary/90 transition-colors whitespace-nowrap">
+        {/* <button 
+          className="btn-primary text-xs py-1 px-2 whitespace-nowrap sm:text-sm sm:px-3 sm:py-1.5">
+          {t('cta.getStarted')}
+        </button> */}
+        <button className="
+          whitespace-nowrap bg-primary text-white font-semibold
+          text-xs sm:text-lg leading-none px-[10px] py-[8px] rounded-sm
+          sm:text-sm sm:leading-normal sm:px-8 sm:py-3 sm:rounded
+        ">
           {t('cta.getStarted')}
         </button>
       </div>
