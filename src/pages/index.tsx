@@ -118,13 +118,13 @@ export default function Home() {
             animate="visible"
             variants={textVariants}
           >
-            <h1 className={`${playfair.className} text-5xl md:text-6xl font-bold mb-6 text-primary`}>
+            <h1 className={`${playfair.className} text-4xl md:text-6xl font-bold mb-4 md:mb-6 text-primary`}>
               {t('site.name')}
             </h1>
             {/* <p className="text-xl md:text-2xl text-[#333] mb-2 font-medium">
               {t('site.description')}
             </p> */}
-            <p className="text-xl max-w-3xl mx-auto text-[#555] leading-relaxed">
+            <p className="text-base md:text-xl max-w-3xl mx-auto text-[#555] leading-relaxed">
               {t('site.slogan')}
             </p>
           </motion.div>
@@ -149,10 +149,10 @@ export default function Home() {
                       <div className="w-20 h-20 rounded-full bg-primary-bg-light flex items-center justify-center mb-6">
                         {feature.icon}
                       </div>
-                      <h3 className={`${playfair.className} text-3xl font-bold mb-4 text-gray-800`}>
+                      <h3 className={`${playfair.className} text-2xl md:text-3xl font-bold mb-3 md:mb-4 text-gray-800`}>
                         {t(feature.titleKey)}
                       </h3>
-                      <p className="text-gray-600 max-w-lg text-lg">
+                      <p className="text-gray-600 max-w-lg text-base md:text-lg">
                         {t(feature.descKey)}
                       </p>
                     </div>
@@ -188,10 +188,10 @@ export default function Home() {
                   <div className="mb-6 p-4 bg-primary/10 rounded-full">
                     {features[currentFeatureIndex].icon}
                   </div>
-                  <h3 className={`${playfair.className} text-xl font-bold mb-3 text-gray-800`}>
+                  <h3 className={`${playfair.className} text-lg md:text-xl font-bold mb-2 md:mb-3 text-gray-800`}>
                     {t(features[currentFeatureIndex].titleKey)}
                   </h3>
-                  <p className="text-gray-600">
+                  <p className="text-gray-600 text-sm md:text-base">
                     {t(features[currentFeatureIndex].descKey)}
                   </p>
                 </motion.div>
@@ -212,15 +212,15 @@ export default function Home() {
 
           {/* CTA 按钮 */}
           <motion.div
-            className="flex flex-row gap-4 justify-center animate-on-scroll mb-8"
+            className="flex flex-row gap-3 md:gap-4 justify-center animate-on-scroll mb-8"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            <button className="btn-primary">
+            <button className="btn-primary text-sm md:text-base py-2 px-4 md:py-3 md:px-6">
               {t('cta.getStarted')}
             </button>
-            <button className="btn-secondary">
+            <button className="btn-secondary text-sm md:text-base py-2 px-4 md:py-3 md:px-6">
               {t('cta.learnMore')}
             </button>
           </motion.div>

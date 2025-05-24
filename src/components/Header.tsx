@@ -50,7 +50,7 @@ export default function Header() {
         </div>
         <button 
           className="px-2 sm:px-3 py-1.5 sm:py-2 text-sm rounded-md bg-primary text-white hover:bg-primary/90 transition-colors whitespace-nowrap">
-          <b>{t('cta.getStarted')}</b>
+          {t('cta.getStarted')}
         </button>
       </div>
     </nav>
