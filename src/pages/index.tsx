@@ -212,7 +212,7 @@ export default function Home() {
 
           {/* CTA 按钮 */}
           <motion.div
-            className="flex flex-col sm:flex-row gap-5 justify-center animate-on-scroll mb-8"
+            className="flex flex-row gap-4 justify-center animate-on-scroll mb-8"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
