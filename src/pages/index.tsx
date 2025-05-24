@@ -2,6 +2,7 @@ import '@/styles/globals.css'
 import { useEffect, useRef, useState } from "react";
 import Head from 'next/head';
 import Image from "next/image";
+import Link from 'next/link';
 import { motion, AnimatePresence } from "framer-motion";
 import { FaCalendarAlt, FaUserAlt, FaBuilding, FaTicketAlt, FaChartLine } from "react-icons/fa";
 
@@ -133,64 +134,39 @@ export default function Home() {
         {/* 导航栏 */}
         <nav className="w-full py-5 px-8 flex justify-between items-center z-10 bg-white/90 backdrop-blur-sm border-b border-primary/10">
           <div className="flex items-center">
-            <a href="/" className="flex items-center">
-              <Image 
-                src="/okielivelogo.png" 
-                alt={t('site.name')} 
-                width={200} 
-                height={52} 
-                className="h-10 w-auto" 
-                priority
+            <Link href="/" className="hover:opacity-80 transition-opacity">
+              <Image
+                src="/okielivelogo.png"
+                alt="OkieLive Logo"
+                width={120}
+                height={40}
+                className="object-contain"
               />
-            </a>
+            </Link>
           </div>
           <div className="flex items-center gap-4">
-            <div className="relative" ref={langMenuRef}>
-              <button 
-                onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}
-                className="px-4 py-2 rounded-md text-sm flex items-center gap-2 bg-primary-bg-medium text-primary hover:bg-primary-bg-dark transition-colors"
+            <div className="relative group">
+              <select
+                value={language}
+                onChange={(e) => setLanguage(e.target.value as 'zh' | 'en' | 'ja')}
+                className="appearance-none px-3 py-2 rounded-md hover:bg-gray-100 flex items-center gap-2 pr-8 cursor-pointer"
               >
-                <span>{language === "zh" ? "中文" : language === "ja" ? "日本語" : "English"}</span>
-                <svg xmlns="http://www.w3.org/2000/svg" className={`h-4 w-4 transition-transform ${isLangMenuOpen ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-              
-              {isLangMenuOpen && (
-                <div className="absolute top-full right-0 mt-1 bg-white rounded-md shadow-lg overflow-hidden z-20 min-w-[120px]">
-                  <button 
-                    onClick={() => {
-                      setLanguage("zh");
-                      setIsLangMenuOpen(false);
-                    }}
-                    className={`w-full px-4 py-2 text-left text-sm hover:bg-primary-bg-light transition-colors ${language === "zh" ? "text-primary font-medium" : "text-gray-700"}`}
-                  >
-                    中文
-                  </button>
-                  <button 
-                    onClick={() => {
-                      setLanguage("en");
-                      setIsLangMenuOpen(false);
-                    }}
-                    className={`w-full px-4 py-2 text-left text-sm hover:bg-primary-bg-light transition-colors ${language === "en" ? "text-primary font-medium" : "text-gray-700"}`}
-                  >
-                    English
-                  </button>
-                  <button 
-                    onClick={() => {
-                      setLanguage("ja");
-                      setIsLangMenuOpen(false);
-                    }}
-                    className={`w-full px-4 py-2 text-left text-sm hover:bg-primary-bg-light transition-colors ${language === "ja" ? "text-primary font-medium" : "text-gray-700"}`}
-                  >
-                    日本語
-                  </button>
-                </div>
-              )}
+                <option value="zh">中文</option>
+                <option value="en">English</option>
+                <option value="ja">日本語</option>
+              </select>
+              <svg 
+                className="w-4 h-4 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" 
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
             </div>
-            
-            <button className="px-4 py-2 rounded-md text-sm bg-primary text-white hover:bg-primary-700 transition-colors font-medium">
-              {t('action.get_started')}
+            <button 
+              className="px-1 py-1 text-sm rounded-md btn-primary">
+              {t('cta.getStarted')}
             </button>
           </div>
         </nav>
