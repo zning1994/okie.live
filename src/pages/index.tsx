@@ -121,12 +121,12 @@ export default function Home() {
             <h1 className={`${playfair.className} text-5xl md:text-6xl font-bold mb-6 text-primary`}>
               {t('site.name')}
             </h1>
-            <p className="text-xl md:text-2xl text-[#333] mb-2 font-medium">
+            {/* <p className="text-xl md:text-2xl text-[#333] mb-2 font-medium">
               {t('site.description')}
-            </p>
-            {/* <p className="text-lg max-w-3xl mx-auto text-[#555] leading-relaxed">
-              {t('site.slogan')}
             </p> */}
+            <p className="text-xl max-w-3xl mx-auto text-[#555] leading-relaxed">
+              {t('site.slogan')}
+            </p>
           </motion.div>
 
           {/* 特性展示 */}

@@ -149,10 +149,10 @@ const translations: Translations = {
   zh: {
     // 网站基本信息
     'site.title': '欧奇演界 - 一站式演出生态平台',
-    'site.description': '艺人、场地、主办方，一站式演出生态平台',
+    'site.description': '艺人、场地、主办方。一站式演出生态平台',
     'site.slogan': '欧奇演界 · 一站式演出生态平台',
     'site.copyright': '  2025 Okie.live. All rights reserved.',
-    'site.name': '欧奇演界',
+    'site.name': 'OkieLive',
     
     // 导航
     'nav.home': '首页',
@@ -230,7 +230,7 @@ const translations: Translations = {
     'privacy.security.description': '個人情報の紛失、盗難、不正使用、不正アクセスから保護するための適切な措置を講じています。',
     'privacy.contact.title': 'お問い合わせ',
     'privacy.contact.description': 'このプライバシーポリシーについてご質問がある場合は、お問い合わせください。',
-    'site.slogan': 'OkieLive – パフォーマンスの世界を調和させる',
+    'site.slogan': 'OkieLive · パフォーマンスの世界を調和させる',
     'site.copyright': ' 2025 Okie.live. All rights reserved.',
     'site.name': 'OkieLive',
     
