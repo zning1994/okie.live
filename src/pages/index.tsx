@@ -140,7 +140,7 @@ export default function Home() {
                 alt="OkieLive Logo"
                 width={160}
                 height={40}
-                className="w-[160px] sm:w-[200px] h-auto object-contain"
+                className="w-[140px] sm:w-[200px] h-auto object-contain"
               />
             </Link>
           </div>
@@ -172,7 +172,7 @@ export default function Home() {
         </nav>
 
         {/* 主内容区 */}
-        <main className="flex-1 w-full max-w-6xl mx-auto px-8 py-8 sm:py-16 flex flex-col items-center z-10">
+        <main className="flex-1 w-full max-w-6xl mx-auto px-8 py-10 sm:py-16 flex flex-col items-center z-10">
           {/* 标题和介绍 */}
           <motion.div 
             className="text-center mb-10 animate-on-scroll"
@@ -183,7 +183,7 @@ export default function Home() {
             <h1 className={`${playfair.className} text-5xl md:text-6xl font-bold mb-6 text-primary`}>
               {t('site.name')}
             </h1>
-            <p className="text-xl md:text-2xl text-[#333] mb-8 font-medium">
+            <p className="text-xl md:text-2xl text-[#333] mb-2 font-medium">
               {t('site.description')}
             </p>
             {/* <p className="text-lg max-w-3xl mx-auto text-[#555] leading-relaxed">
@@ -192,7 +192,7 @@ export default function Home() {
           </motion.div>
 
           {/* 特性展示 */}
-          <div className="w-full mb-6 sm:mb-12 animate-on-scroll">
+          <div className="w-full mb-2 sm:mb-12 animate-on-scroll">
             {/* <h2 className={`${playfair.className} text-3xl font-bold text-center mb-12 text-gray-800`}>
               {t('features.title')}
             </h2> */}
