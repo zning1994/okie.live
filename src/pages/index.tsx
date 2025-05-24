@@ -2,6 +2,7 @@ import '@/styles/globals.css'
 import { useEffect, useRef, useState } from "react";
 import Head from 'next/head';
 import Image from "next/image";
+import Link from 'next/link';
 import { motion, AnimatePresence } from "framer-motion";
 import { FaCalendarAlt, FaUserAlt, FaBuilding, FaTicketAlt, FaChartLine } from "react-icons/fa";
 
@@ -115,28 +116,39 @@ export default function Home() {
         {/* 导航栏 */}
         <nav className="w-full py-5 px-8 flex justify-between items-center z-10 bg-white/90 backdrop-blur-sm border-b border-primary/10">
           <div className="flex items-center">
-            <h1 className={`${playfair.className} text-2xl font-bold text-primary`}>
-              {t('site.name')}
-            </h1>
+            <Link href="/" className="hover:opacity-80 transition-opacity">
+              <Image
+                src="/okielivelogo.png"
+                alt="OkieLive Logo"
+                width={120}
+                height={40}
+                className="object-contain"
+              />
+            </Link>
           </div>
           <div className="flex items-center gap-4">
+            <div className="relative group">
+              <select
+                value={language}
+                onChange={(e) => setLanguage(e.target.value as 'zh' | 'en' | 'ja')}
+                className="appearance-none px-3 py-2 rounded-md hover:bg-gray-100 flex items-center gap-2 pr-8 cursor-pointer"
+              >
+                <option value="zh">中文</option>
+                <option value="en">English</option>
+                <option value="ja">日本語</option>
+              </select>
+              <svg 
+                className="w-4 h-4 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" 
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
             <button 
-              onClick={() => setLanguage("zh")}
-              className={`px-4 py-2 rounded-md text-sm transition-colors ${language === "zh" ? "bg-primary text-white" : "bg-primary-bg-medium text-primary"}`}
-            >
-              中文
-            </button>
-            <button 
-              onClick={() => setLanguage("en")}
-              className={`px-4 py-2 rounded-md text-sm transition-colors ${language === "en" ? "bg-primary text-white" : "bg-primary-bg-medium text-primary"}`}
-            >
-              English
-            </button>
-            <button 
-              onClick={() => setLanguage("ja")}
-              className={`px-4 py-2 rounded-md text-sm transition-colors ${language === "ja" ? "bg-primary text-white" : "bg-primary-bg-medium text-primary"}`}
-            >
-              日本語
+              className="px-1 py-1 text-sm rounded-md btn-primary">
+              {t('cta.getStarted')}
             </button>
           </div>
         </nav>

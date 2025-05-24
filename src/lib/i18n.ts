@@ -25,6 +25,7 @@ export type TranslationKey =
   | 'action.learn_more'
   | 'cta.getStarted'
   | 'cta.learnMore'
+  | 'cta.tryNow'
   
   // 页脚
   | 'footer.about_us'
@@ -84,6 +85,7 @@ const translations: Translations = {
     'action.learn_more': 'Learn More',
     'cta.getStarted': 'Get Started',
     'cta.learnMore': 'Learn More',
+    'cta.tryNow': 'Try Now',
     
     // 页脚
     'footer.about_us': 'About Us',
@@ -127,6 +129,7 @@ const translations: Translations = {
     'action.learn_more': '了解更多',
     'cta.getStarted': '立即体验',
     'cta.learnMore': '了解更多',
+    'cta.tryNow': '立即体验',
     
     // 页脚
     'footer.about_us': '关于我们',
@@ -170,6 +173,7 @@ const translations: Translations = {
     'action.learn_more': '詳細を見る',
     'cta.getStarted': '今すぐ始める',
     'cta.learnMore': '詳細を見る',
+    'cta.tryNow': '今すぐ試す',
     
     // 页脚
     'footer.about_us': '会社概要',
