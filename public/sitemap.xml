@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <!-- 主页 -->
+  <url>
+    <loc>https://okie.live/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://okie.live/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://okie.live/?lang=zh"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://okie.live/?lang=ja"/>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <!-- 关于我们 -->
+  <url>
+    <loc>https://okie.live/about</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://okie.live/about?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://okie.live/about?lang=zh"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://okie.live/about?lang=ja"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- 联系我们 -->
+  <url>
+    <loc>https://okie.live/contact</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://okie.live/contact?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://okie.live/contact?lang=zh"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://okie.live/contact?lang=ja"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- 隐私政策 -->
+  <url>
+    <loc>https://okie.live/privacy</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://okie.live/privacy?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://okie.live/privacy?lang=zh"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://okie.live/privacy?lang=ja"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+</urlset>

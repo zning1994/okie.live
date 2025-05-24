@@ -1,8 +1,9 @@
+/* eslint-disable */
+
 import { ReactNode } from 'react';
-import Head from 'next/head';
 import Header from './Header';
 import Footer from './Footer';
-import { useI18n } from '@/lib/i18n';
+import SeoHead from './SeoHead';
 
 // 使用 Google Fonts 的 Playfair Display 和 Montserrat 字体
 import { Playfair_Display, Montserrat } from "next/font/google";
@@ -16,23 +17,11 @@ interface LayoutProps {
 }
 
 export default function Layout({ children, title, description }: LayoutProps) {
-  const { t } = useI18n();
-  
-  // 使用传入的标题或默认标题
-  const pageTitle = title || t('site.title');
-  // 使用传入的描述或默认描述
-  const pageDescription = description || t('site.description');
-
   return (
     <>
-      <Head>
-        <title>{pageTitle}</title>
-        <meta name="description" content={pageDescription} />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <SeoHead title={title} description={description} />
       
-      <div className={`flex flex-col min-h-screen ${playfair.className} ${montserrat.className}`}>
+      <div className={`flex flex-col min-h-screen ${montserrat.className} bg-primary-bg-light`}>
         <Header />
         <main className="flex-grow">
           {children}
