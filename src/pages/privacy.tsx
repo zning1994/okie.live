@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useI18n } from '@/lib/i18n'
 import type { TranslationKey } from '@/lib/i18n';
-import Layout from '@/components/layout/Layout'
+import Layout from '@/components/Layout'
 
 export default function Privacy() {
   // 始终调用 useI18n，确保 hooks 顺序一致

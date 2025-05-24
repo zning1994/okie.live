@@ -15,7 +15,7 @@ import { useI18n } from '@/lib/i18n';
 import type { TranslationKey } from '@/lib/i18n';
 
 // 导入布局组件
-import Layout from '@/components/layout/Layout';
+import Layout from '@/components/Layout';
 
 export default function Home() {
   // 使用i18n国际化系统
