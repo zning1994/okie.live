@@ -110,31 +110,31 @@ export default function Home() {
         />
       </Head>
       <div
-        className={`${montserrat.className} min-h-screen flex flex-col items-center relative overflow-hidden bg-okie-bg-light`}
+        className={`${montserrat.className} min-h-screen flex flex-col items-center relative overflow-hidden bg-primary-bg-light`}
       >
         {/* 导航栏 */}
-        <nav className="w-full py-5 px-8 flex justify-between items-center z-10 bg-white/90 backdrop-blur-sm border-b border-okie-primary/10">
+        <nav className="w-full py-5 px-8 flex justify-between items-center z-10 bg-white/90 backdrop-blur-sm border-b border-primary/10">
           <div className="flex items-center">
-            <h1 className={`${playfair.className} text-2xl font-bold text-okie-primary`}>
-              {language === "zh" ? "欧奇演界" : "OkieLive"}
+            <h1 className={`${playfair.className} text-2xl font-bold text-primary`}>
+              {t('site.name')}
             </h1>
           </div>
           <div className="flex items-center gap-4">
             <button 
               onClick={() => setLanguage("zh")}
-              className={`px-4 py-2 rounded-md text-sm transition-colors ${language === "zh" ? "bg-okie-primary text-white" : "bg-okie-bg-medium text-okie-primary"}`}
+              className={`px-4 py-2 rounded-md text-sm transition-colors ${language === "zh" ? "bg-primary text-white" : "bg-primary-bg-medium text-primary"}`}
             >
               中文
             </button>
             <button 
               onClick={() => setLanguage("en")}
-              className={`px-4 py-2 rounded-md text-sm transition-colors ${language === "en" ? "bg-okie-primary text-white" : "bg-okie-bg-medium text-okie-primary"}`}
+              className={`px-4 py-2 rounded-md text-sm transition-colors ${language === "en" ? "bg-primary text-white" : "bg-primary-bg-medium text-primary"}`}
             >
               English
             </button>
             <button 
               onClick={() => setLanguage("ja")}
-              className={`px-4 py-2 rounded-md text-sm transition-colors ${language === "ja" ? "bg-okie-primary text-white" : "bg-okie-bg-medium text-okie-primary"}`}
+              className={`px-4 py-2 rounded-md text-sm transition-colors ${language === "ja" ? "bg-primary text-white" : "bg-primary-bg-medium text-primary"}`}
             >
               日本語
             </button>
@@ -145,13 +145,13 @@ export default function Home() {
         <main className="flex-1 w-full max-w-6xl mx-auto px-8 py-16 flex flex-col items-center z-10">
           {/* 标题和介绍 */}
           <motion.div 
-            className="text-center mb-16 animate-on-scroll"
+            className="text-center mb-10 animate-on-scroll"
             initial="hidden"
             animate="visible"
             variants={textVariants}
           >
-            <h1 className={`${playfair.className} text-5xl md:text-6xl font-bold mb-6 text-okie-primary`}>
-              {language === "zh" ? "欧奇演界" : "OkieLive"}
+            <h1 className={`${playfair.className} text-5xl md:text-6xl font-bold mb-6 text-primary`}>
+              {t('site.name')}
             </h1>
             <p className="text-xl md:text-2xl text-[#333] mb-8 font-medium">
               {t('site.description')}
@@ -162,11 +162,11 @@ export default function Home() {
           </motion.div>
 
           {/* 特性展示 */}
-          <div className="w-full mb-20 animate-on-scroll">
+          <div className="w-full mb-12 animate-on-scroll">
             {/* <h2 className={`${playfair.className} text-3xl font-bold text-center mb-12 text-gray-800`}>
               {t('features.title')}
             </h2> */}
-            <div className="hidden md:block relative w-full max-w-2xl mx-auto h-64 mb-12">
+            <div className="hidden md:block relative w-full max-w-sm mx-auto h-64 mb-8">
               {/* 桌面版轮播特性 */}
               <div className="relative w-full h-full bg-white rounded-xl shadow-lg overflow-hidden">
                 {features.map((feature, index) => (
@@ -178,7 +178,7 @@ export default function Home() {
                     transition={{ duration: 0.5 }}
                   >
                     <div className="flex flex-col items-center">
-                      <div className="w-20 h-20 rounded-full bg-okie-bg-light flex items-center justify-center mb-6">
+                      <div className="w-20 h-20 rounded-full bg-primary-bg-light flex items-center justify-center mb-6">
                         {feature.icon}
                       </div>
                       <h3 className={`${playfair.className} text-3xl font-bold mb-4 text-gray-800`}>
@@ -197,7 +197,7 @@ export default function Home() {
                 {features.map((_, index) => (
                   <button
                     key={index}
-                    className={`w-3 h-3 rounded-full transition-colors ${index === currentFeatureIndex ? "bg-okie-primary" : "bg-gray-300"}`}
+                    className={`w-3 h-3 rounded-full transition-colors ${index === currentFeatureIndex ? "bg-primary" : "bg-gray-300"}`}
                     onClick={() => setCurrentFeatureIndex(index)}
                   />
                 ))}
@@ -207,7 +207,7 @@ export default function Home() {
 
           {/* 轮播特性（移动端） */}
           <div className="md:hidden w-full mb-16 animate-on-scroll">
-            <div className="bg-white p-8 rounded-lg border border-okie-primary/10 shadow-sm">
+            <div className="bg-white p-8 rounded-lg border border-primary/10 shadow-sm">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentFeatureIndex}
@@ -217,7 +217,7 @@ export default function Home() {
                   exit={{ opacity: 0, x: -50 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <div className="mb-6 p-4 bg-okie-primary/10 rounded-full">
+                  <div className="mb-6 p-4 bg-primary/10 rounded-full">
                     {features[currentFeatureIndex].icon}
                   </div>
                   <h3 className={`${playfair.className} text-xl font-bold mb-3 text-gray-800`}>
@@ -233,7 +233,7 @@ export default function Home() {
                   <button
                     key={index}
                     className={`w-2 h-2 rounded-full ${
-                      index === currentFeatureIndex ? "bg-okie-primary" : "bg-gray-300"
+                      index === currentFeatureIndex ? "bg-primary" : "bg-gray-300"
                     }`}
                     onClick={() => setCurrentFeatureIndex(index)}
                   />
@@ -259,19 +259,19 @@ export default function Home() {
         </main>
 
         {/* 页脚 */}
-        <footer className="w-full py-8 bg-white border-t border-okie-primary/10 z-10">
+        <footer className="w-full py-8 bg-white border-t border-primary/10 z-10">
           <div className="max-w-6xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-600 mb-6 md:mb-0">
               © {t('site.copyright')}
             </p>
             <div className="flex gap-8">
-              <a href="#" className="text-gray-600 hover:text-okie-primary transition-colors">
+              <a href="#" className="text-gray-600 hover:text-primary transition-colors">
                 {t('footer.about_us')}
               </a>
-              <a href="#" className="text-gray-600 hover:text-okie-primary transition-colors">
+              <a href="#" className="text-gray-600 hover:text-primary transition-colors">
                 {t('footer.contact_us')}
               </a>
-              <a href="#" className="text-gray-600 hover:text-okie-primary transition-colors">
+              <a href="#" className="text-gray-600 hover:text-primary transition-colors">
                 {t('footer.privacy_policy')}
               </a>
             </div>
