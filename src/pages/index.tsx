@@ -22,6 +22,24 @@ export default function Home() {
   // 鼠标悬停效果状态
   const [hoveredFeature, setHoveredFeature] = useState<number | null>(null);
   
+  // 语言下拉菜单状态
+  const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
+  const langMenuRef = useRef<HTMLDivElement>(null);
+  
+  // 点击页面其他区域时关闭语言下拉菜单
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (langMenuRef.current && !langMenuRef.current.contains(event.target as Node)) {
+        setIsLangMenuOpen(false);
+      }
+    };
+    
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+  
   // 语言初始化由 LanguageDetector 组件处理
   
   // 页面滚动动画效果
@@ -115,28 +133,64 @@ export default function Home() {
         {/* 导航栏 */}
         <nav className="w-full py-5 px-8 flex justify-between items-center z-10 bg-white/90 backdrop-blur-sm border-b border-primary/10">
           <div className="flex items-center">
-            <h1 className={`${playfair.className} text-2xl font-bold text-primary`}>
-              {t('site.name')}
-            </h1>
+            <a href="/" className="flex items-center">
+              <Image 
+                src="/okielivelogo.png" 
+                alt={t('site.name')} 
+                width={200} 
+                height={52} 
+                className="h-10 w-auto" 
+                priority
+              />
+            </a>
           </div>
           <div className="flex items-center gap-4">
-            <button 
-              onClick={() => setLanguage("zh")}
-              className={`px-4 py-2 rounded-md text-sm transition-colors ${language === "zh" ? "bg-primary text-white" : "bg-primary-bg-medium text-primary"}`}
-            >
-              中文
-            </button>
-            <button 
-              onClick={() => setLanguage("en")}
-              className={`px-4 py-2 rounded-md text-sm transition-colors ${language === "en" ? "bg-primary text-white" : "bg-primary-bg-medium text-primary"}`}
-            >
-              English
-            </button>
-            <button 
-              onClick={() => setLanguage("ja")}
-              className={`px-4 py-2 rounded-md text-sm transition-colors ${language === "ja" ? "bg-primary text-white" : "bg-primary-bg-medium text-primary"}`}
-            >
-              日本語
+            <div className="relative" ref={langMenuRef}>
+              <button 
+                onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}
+                className="px-4 py-2 rounded-md text-sm flex items-center gap-2 bg-primary-bg-medium text-primary hover:bg-primary-bg-dark transition-colors"
+              >
+                <span>{language === "zh" ? "中文" : language === "ja" ? "日本語" : "English"}</span>
+                <svg xmlns="http://www.w3.org/2000/svg" className={`h-4 w-4 transition-transform ${isLangMenuOpen ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              
+              {isLangMenuOpen && (
+                <div className="absolute top-full right-0 mt-1 bg-white rounded-md shadow-lg overflow-hidden z-20 min-w-[120px]">
+                  <button 
+                    onClick={() => {
+                      setLanguage("zh");
+                      setIsLangMenuOpen(false);
+                    }}
+                    className={`w-full px-4 py-2 text-left text-sm hover:bg-primary-bg-light transition-colors ${language === "zh" ? "text-primary font-medium" : "text-gray-700"}`}
+                  >
+                    中文
+                  </button>
+                  <button 
+                    onClick={() => {
+                      setLanguage("en");
+                      setIsLangMenuOpen(false);
+                    }}
+                    className={`w-full px-4 py-2 text-left text-sm hover:bg-primary-bg-light transition-colors ${language === "en" ? "text-primary font-medium" : "text-gray-700"}`}
+                  >
+                    English
+                  </button>
+                  <button 
+                    onClick={() => {
+                      setLanguage("ja");
+                      setIsLangMenuOpen(false);
+                    }}
+                    className={`w-full px-4 py-2 text-left text-sm hover:bg-primary-bg-light transition-colors ${language === "ja" ? "text-primary font-medium" : "text-gray-700"}`}
+                  >
+                    日本語
+                  </button>
+                </div>
+              )}
+            </div>
+            
+            <button className="px-4 py-2 rounded-md text-sm bg-primary text-white hover:bg-primary-700 transition-colors font-medium">
+              {t('action.get_started')}
             </button>
           </div>
         </nav>
